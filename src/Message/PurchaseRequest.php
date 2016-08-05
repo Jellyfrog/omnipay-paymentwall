@@ -868,7 +868,7 @@ class PurchaseRequest extends AbstractLibraryRequest
         $this->response = new Response($this, $properties);
 
         if ($charge->isSuccessful()) {
-            if ($charge->isCaptured()) {
+            if ($charge->isCaptured() && !$charge->isUnderReview()) {
                 $this->response->setCaptured(true);
             } elseif ($charge->isUnderReview()) {
                 $this->response->setUnderReview(true);
